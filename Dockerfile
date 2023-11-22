@@ -1,3 +1,7 @@
-FROM node:20.9.0-alpine3.18
+# Use the official Alpine Linux base image
+FROM alpine:latest
 
-RUN apk add -U subversion
+# Your additional Dockerfile configurations go here
+
+# Example: Print a message when the container starts
+CMD echo "Hello, this is an Alpine Linux container!"
