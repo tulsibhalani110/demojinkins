@@ -2,14 +2,11 @@ pipeline {
     agent any
 
     stages {
-        stage('Pull Docker Image') {
+        stage('Build Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials-id') {
-                        // Pull the Alpine Linux image
-                        def alpineImage = docker.image('alpine:latest')
-                        alpineImage.pull()
-                    }
+                    // Build the custom Docker image on top of Alpine
+                    def customImage = docker.build('your-docker-hub-username/your-custom-image:latest', '.')
                 }
             }
         }
