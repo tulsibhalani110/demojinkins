@@ -5,8 +5,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build the custom Docker image on top of Alpine
-                    def customImage = docker.build('your-docker-hub-username/your-custom-image:latest', '.')
+                    def customImage = docker.build('tulsi/alpine:latest', '.')
                 }
             }
         }
