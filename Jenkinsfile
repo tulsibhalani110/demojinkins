@@ -1,15 +1,29 @@
 pipeline {
     agent any
+
     stages {
-        stage('Build') {
-            agent {
-                docker {
-                    image 'gradle:8.2.0-jdk17-alpine'
+        stage('Pull Docker Image') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials-id') {
+                        // Pull the Alpine Linux image
+                        def alpineImage = docker.image('alpine:latest')
+                        alpineImage.pull()
+                    }
                 }
             }
-            steps {
-                sh 'gradle --version'
-            }
+        }
+
+        // Additional stages
+    }
+
+    post {
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed :('
         }
     }
 }
+
