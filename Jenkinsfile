@@ -5,7 +5,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    def customImage = docker.build('tulsibhalani110/alpine:latest', '.')
+                 docker.build('tulsibhalani110/alpine:latest', '.')
                 }
             }
         }
