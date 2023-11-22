@@ -2,24 +2,20 @@ pipeline {
     agent any
 
     stages {
-        stage('Build Docker Image') {
+        stage('Checkout') {
             steps {
-                script {
-                 docker.build('tulsibhalani110/alpine:latest', '.')
-                }
+                // Checkout your source code from version control (e.g., Git)
+                checkout scm
             }
         }
 
-        // Additional stages
-    }
-
-    post {
-        success {
-            echo 'Pipeline succeeded!'
-        }
-        failure {
-            echo 'Pipeline failed :('
+        stage('Build Docker Image') {
+            steps {
+                // Build the Docker image
+                script {
+                    docker.build("alpine:latest")
+                }
+            }
         }
     }
 }
-
